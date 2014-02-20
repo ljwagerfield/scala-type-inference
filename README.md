@@ -25,7 +25,7 @@ In Scala, if you define the following function:
 
 Type information will flow from parameters at the call-site to provide `L`. However, because the call-site only sees `L` 
 in the *parameter list*  it will actually leave `A` as `Nothing`. This can be confusing since some type systems will 
-be able to extract the types. *(Unfortunately I don't know the exact term for this behaviour.)*
+be able to extract the types. *(I don't know the exact term for this behaviour.)*
 
 The above example can be re-worked by ensuring the type we actually care about (type `A`) is visible in the parameter
 list, allowing it to be inferred at the call-site:
