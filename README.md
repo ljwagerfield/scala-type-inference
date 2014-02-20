@@ -15,7 +15,7 @@ Scala uses left-to-right type inference: information flows across the parameter 
 through the method body, and out to the result. This contrasts bidirectional or full type inference systems such as
 Hindley-Milner (used in Haskell) which may appear more intuitive and less restrictive to users.
 
-In Scala, if you define the following parameters:
+In Scala, if you define the following function:
 
     def head[L <: List[A], A](list: L): A
 
