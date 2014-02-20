@@ -17,7 +17,7 @@ Hindley-Milner (used in Haskell) which may appear more intuitive and less restri
 
 ### Type parameters of type parameters cannot be inferred
 
-Put another way: Scala type inference only *sees* types specified in the *parameter list* (not to be confused with *type parameter list*).
+Put another way: Scala type inference only sees types specified in the *parameter list* (not to be confused with *type parameter list*).
 
 In Scala, if you define the following function:
 
