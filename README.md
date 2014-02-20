@@ -50,7 +50,7 @@ This is called 'per-list inference' and contrasts 'per-parameter inference'. Bot
 >       def foo[A, B >: A, C >: A](x : B, y : C)
 
 Applied to the previous example, we can force the inference engine to infer a type from a single parameter by isolating 
-that paramter in its own parameter list - i.e. by currying the function:
+that parameter into its own parameter list - i.e. by currying the function:
 
     def getN[A](list: List[A])(List[A] => A): A
 
