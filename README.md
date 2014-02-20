@@ -36,6 +36,30 @@ If there is a genuine need for both `L` and `A`, we would have to ensure both ap
 
     def head[A, L[X] <: List[X]](list: L[A]): A
     
+### Avoiding f-bounded polymorphism
+
+F-bounded polymorphism should be avoided in most cases - especially in Scala when we consider the behaviour described 
+above. To understand how to avoid it, we need to first know what makes us require it:
+
+>   F-bounded polymorphism occurs when a type expects *important interface changes* to be introduced in derived types.
+
+This can be avoided by *composing* the expected areas of change instead of attempting to support them as a derivative of the current type.
+
+For example:
+
+    trait Person[P <: Person[P, H], H] {
+        def colorHair(hairDye: H): P
+    }
+
+becomes:
+
+    trait Person[V, H] {
+        val visibleFeatures: V
+        def colorHair(hairDye: H): Person[V, H]
+    }
+    
+Here, the 'expected change' is the person's visible features - the previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `H` impossible.
+    
 ### Previous parameters are not used to infer future parameters
 
 Type information only flows across parameter *lists*, not *parameters*. In other words: Scala does not use previous 
