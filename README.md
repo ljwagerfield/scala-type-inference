@@ -6,7 +6,7 @@ types *always* seem to be resolvable. The switch is naturally frustrating.
 
 However, there are genuine reasons why Scala cannot resolve certain types - and the answer is typically due to some other Scala feature which forbids type inference from working in such a way. The likelihood is that Scala type inference won't improve because it *can't 'improve'* ([read comments here][scala-type-inference-blog]).
 
-So, it's best we understand how to deal with it :)
+So, it's best to understand how to deal with it :)
 
 Scala Type Inference
 --------------------
