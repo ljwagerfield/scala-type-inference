@@ -4,7 +4,7 @@ Scala Type Inference
 Scala's type inference can feel restrictive at times, especially when coming from languages like C# and Haskell where 
 types *always* seem to be resolvable. The switch is naturally frustrating.
 
-However, there are genuine reasons why Scala cannot resolve certain types - and the answer is typically due to some other Scala feature which forbids type inference to work in such a way. The likelihood is that it won't improve because it *can't 'improve'* ([read comments here][scala-type-inference-blog]).
+However, there are genuine reasons why Scala cannot resolve certain types - and the answer is typically due to some other Scala feature which forbids type inference to work in such a way. The likelihood is that Scala type inference won't improve because it *can't 'improve'* ([read comments here][scala-type-inference-blog]).
 
 So, it's best we understand how to deal with it :)
 
