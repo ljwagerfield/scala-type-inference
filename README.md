@@ -38,12 +38,14 @@ If there is a genuine need for both `L` and `A`, we would have to ensure both ap
     
 ### Avoiding f-bounded polymorphism
 
-F-bounded polymorphism should be avoided in most cases - especially in Scala when we consider the behaviour described 
-above. To understand how to avoid it, we need to first know what makes us require it:
+F-bounded polymorphism should be avoided in most cases - especially in Scala when considering the above behaviour. To understand how to avoid it, we first need to know what makes us require it:
 
 >   F-bounded polymorphism occurs when a type expects *important interface changes* to be introduced in derived types.
 
-This can be avoided by *composing* the expected areas of change instead of attempting to support them as a derivative of the current type.
+This can be avoided by *composing* the expected areas of change instead of attempting to support them as a derivative of the current type. This actually comes back to Gang of Four design patterns:
+
+>   Favor 'object composition' over 'class inheritance'
+>   --  (Gang of Four 1995:20)
 
 For example:
 
