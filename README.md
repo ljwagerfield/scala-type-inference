@@ -15,24 +15,33 @@ Scala uses left-to-right type inference: information flows across the parameter 
 through the method body, and out to the result. This contrasts bidirectional or full type inference systems such as
 Hindley-Milner (used in Haskell) which may appear more intuitive and less restrictive to users.
 
+### Type parameters of type parameters cannot be inferred
+
+Put another way: Scala type inference only *sees* types specified in the *parameter list* (not to be confused with *type parameter list*).
+
 In Scala, if you define the following function:
 
     def head[L <: List[A], A](list: L): A
 
 Type information will flow from parameters at the call-site to provide `L`. However, because the call-site only sees `L` 
-in the *parameter  list* (not to be confused with type parameter list) it will actually leave `A` as `Nothing`. This 
-can be confusing since some type systems will be able to extract the types in the above example (C# is one example).
-*(Unfortunately I don't know the term for the exact property that permits/denies this behaviour.)*
+in the *parameter list*  it will actually leave `A` as `Nothing`. This can be confusing since some type systems will 
+be able to extract the types. *(Unfortunately I don't know the exact term for this behaviour.)*
 
 The above example can be re-worked by ensuring the type we actually care about (type `A`) is visible in the parameter
 list, allowing it to be inferred at the call-site:
 
     def head[A](list: List[A]): A
+    
+If there is a genuine need for both `L` and `A`, we would have to ensure both appear in the parameter list:
 
-Another important point mentioned above is that type information flows from left-to-right across *parameter lists*. In
-other words: Scala does not use previous parameters to infer future parameter types, but does use previous *parameter
-lists*. This is important to understand in cases where the same type is used multiple times in a parameter list, but the 
-call-site is only able to provide type information for one parameter:
+    def head[A, L[X] <: List[X]](list: L[A]): A
+    
+### Previous parameters are not used to infer future parameters
+
+Type information only flows across parameter *lists*, not *parameters*. In other words: Scala does not use previous 
+parameters to infer future parameter types, but does use previous *parameter lists*. This is important to understand 
+in cases where the same type is used multiple times in a parameter list, but the call-site is only able to provide type 
+information for one parameter:
 
     def getN[A](list: List[A], List[A] => A): A
     getN(List(1, 2, 3), l => l.head) // Compile error: 2nd parameter cannot provide type information for `A`.
