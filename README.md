@@ -8,8 +8,8 @@ However, there are genuine reasons why Scala cannot resolve certain types - and 
 
 So, it's best to understand how to deal with it :)
 
-Scala Type Inference
---------------------
+Nuances of Scala
+----------------
 
 Scala uses left-to-right type inference: information flows across the parameter *lists* (*not* the individual parameters),
 through the method body, and out to the result. This contrasts bidirectional or full type inference systems such as
