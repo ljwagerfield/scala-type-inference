@@ -60,7 +60,7 @@ becomes:
         def colorHair(hairDye: H): Person[V, H]
     }
     
-Here, the 'expected change' is the person's visible features - the previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `H` impossible.
+Here, the 'expected change' is the person's visible features - the previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `H` impossible for any function using `Person`.
     
 ### Previous parameters are not used to infer future parameters
 
