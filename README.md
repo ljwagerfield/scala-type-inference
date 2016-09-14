@@ -49,18 +49,18 @@ This can be avoided by *composing* the expected areas of change instead of attem
 
 For example:
 
-    trait Person[P <: Person[P, H], H] {
-        def colorHair(hairDye: H): P
+    trait Vehicle[V <: Vehicle[V, W], W] {
+        def replaceWheels(wheels: W): V
     }
 
 becomes:
 
-    trait Person[V, H] {
-        val visibleFeatures: V
-        def colorHair(hairDye: H): Person[V, H]
+    trait Vehicle[T, W] {
+        val vehicleType: T
+        def replaceWheels(wheels: W): Vehicle[T, W]
     }
     
-Here, the 'expected change' is the person's visible features - the previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `H` impossible for any function using `Person`.
+Here, the 'expected change' is the vehicle type (e.g `Bike`, `Car`, `Lorry`). The previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `W` impossible for any function using `Vehicle`. The new method, which uses composition, does not exhibit this problem.
     
 ### Previous parameters are not used to infer future parameters
 
