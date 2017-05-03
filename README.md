@@ -56,11 +56,11 @@ For example:
 becomes:
 
     trait Vehicle[T, W] {
-        val vehicleType: T
+        val vehicleDetails: T
         def replaceWheels(wheels: W): Vehicle[T, W]
     }
     
-Here, the 'expected change' is the vehicle type (e.g `Bike`, `Car`, `Lorry`). The previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `W` impossible for any function using `Vehicle`. The new method, which uses composition, does not exhibit this problem.
+Here, the 'expected change' is the vehicle details (e.g `Bike`, `Car`, `Lorry`). The previous example assumed this would be added through inheritance, requiring an f-bounded type that made inference of `W` impossible for any function using `Vehicle`. The new method, which uses composition, does not exhibit this problem.
     
 ### Previous parameters are not used to infer future parameters
 
