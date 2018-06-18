@@ -36,6 +36,38 @@ If there is a genuine need for both `L` and `A`, we would have to ensure both ap
 
     def head[A, L[X] <: List[X]](list: L[A]): A
     
+### Type members of type parameters cannot be inferred
+
+The following example will not compile:
+
+```
+object Example {
+  trait AType {
+    type B
+  }
+  
+  case object Foo extends AType { type B = Int }
+  
+  def foo[A <: AType](a: A, b: A#B) = ???
+
+  foo(Foo, 5) // Does not compile
+}
+```
+
+This is because `A#B` is in the same parameter list as where `A` is attempting to be inferred -- which prevents Scala from inferring `A`.
+
+The problem is that Scala attempts to infer type parameters (e.g. `A`) by inspecting all the usages of `A` within that parameter list. So using `a: A, b: A#B` in the same parameter list prevents Scala from inferring `A` because it's also trying to resolve the type of `A` by inspecting `A#B`, which it can't make sense of. Since Scala stops attempting to infer types in subsequent lists that it's already resolved, the solution is to split the types into multiple parameter lists, making the first param list expose an easy-to-resolve `A`, and then using the already-resolved `A` in subsequent lists to reference type members:
+
+```
+object Example {
+  ... same as before ...
+  
+  def foo[A <: AType](a: A)(b: A#B) = ??? // Note: two parameter lists.
+
+  foo(Foo)(5) // Does not compile
+}
+```
+    
 ### Avoiding f-bounded polymorphism
 
 F-bounded polymorphism should be avoided in most cases - especially in Scala when considering the above behaviour. To understand how to avoid it, we first need to know what makes us require it:
