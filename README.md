@@ -50,7 +50,7 @@ object Example {
   
   def foo[A <: AType](a: A, b: A#B) = ???
 
-  foo(Foo, 5) // Does not compile
+  foo(Foo, 5) // Does compile
 }
 ```
 
